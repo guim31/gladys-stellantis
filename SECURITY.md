@@ -30,6 +30,25 @@ Gladys before reporting a problem.
 
 In scope: the code of this repository and the Docker image it publishes.
 
+What the integration handles:
+
+- the Gladys configuration holds no secret: the app (brand), the country, the language, the refresh
+  period and the GPS option. The password of the account is typed on the brand's own sign-in page,
+  never in Gladys;
+- the sign-in code pasted in the "Finish the sign-in" action is sent once to the brand's sign-in
+  server and never stored;
+- in the `/data` volume, file `stellantis.json` (mode 0600, written atomically): the access token,
+  the refresh token and their expiry, the app they belong to, and per car (keyed by VIN) the optional
+  values it reports and its last charge status;
+- the public identifiers of the brands' mobile apps (`src/stellantis/apps.json`, already published
+  by the Home Assistant integration): they identify the app, not a user;
+- network: outbound HTTPS only, to the brand's sign-in server (`idpcvs.peugeot.com`,
+  `idpcvs.citroen.com`, `idpcvs.driveds.com`, `idpcvs.opel.com`, `idpcvs.vauxhall.co.uk`) and to
+  `api.groupe-psa.com`; nothing listens.
+
+The logs never contain a token, a code, an app secret, a full VIN or a position. A report that one of
+them leaks is in scope.
+
 Out of scope: Gladys Assistant itself (see its
-[security policy](https://github.com/GladysAssistant/Gladys/security/policy)),
-and the third-party services and devices the integration talks to.
+[security policy](https://github.com/GladysAssistant/Gladys/security/policy)), the Stellantis cloud
+and the cars.

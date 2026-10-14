@@ -11,13 +11,18 @@ Gladys through
 [`@gladysassistant/integration-sdk`](https://github.com/GladysAssistant/integration-sdk-js),
 its only runtime dependency. It started from the official JavaScript template.
 
+This one reads the Peugeot, Citroën, DS, Opel and Vauxhall cars of a Stellantis
+account (MyPeugeot, MyCitroën, MyDS, MyOpel, MyVauxhall app) from the
+"Connected Car" v4 cloud (`api.groupe-psa.com`). Read-only: see "Stellantis"
+at the end of this file.
+
 ## Commands
 
 ```bash
 npm install
 npm test                                  # node --test, the built-in runner
-node --test test/devices.test.js          # one file
-node --test --test-name-pattern "plug"    # tests whose name matches
+node --test test/runtime.test.js          # one file
+node --test --test-name-pattern "charge"  # tests whose name matches
 npm run lint                              # ESLint
 npm run format:check                      # Prettier, as the CI runs it
 npm run format                            # Prettier, fix in place
@@ -31,16 +36,22 @@ pushing.
 ## Architecture
 
 ```
-index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+index.js                          SDK wiring only: logger, store, registerHandlers, connect()
+src/app.js                        every Gladys handler, registered before connect() (tests reuse it)
+src/runtime.js                    sign-in, own refresh timer, publishing, trigger, actions
+src/devices/vehicle.js            status answer → snapshot → features and states (one device per car)
+src/stellantis/apps.js(.json)     the five apps, their OAuth2 settings per country, the sign-in URL
+src/stellantis/client.js          token exchange and renewal, API calls (vehicles, status)
+src/stellantis/code.js            the code out of whatever the user pasted
+src/stellantis/http.js, errors.js fetch wrapper, errors sorted by what the runtime does
+src/store.js                      /data/stellantis.json (tokens, per-car memory), mode 0600
+src/messages.js, src/i18n.js      user texts and feature names in en/fr/de/es
+src/scenes.js, src/widgets.js     scene action, dashboard widget
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
+scripts/probe.mjs                 checks the real sign-in servers and API (run on a machine with network)
 gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
-test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+docs/{en,fr,de,es}.md, images/    user documentation, re-hosted by Gladys; images linked by absolute URL
+test/                             node --test, against the SDK's fake Gladys and helpers/fakeStellantis.js
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -56,8 +67,7 @@ test/                             node --test, against the SDK's fake Gladys (in
   writable volume. Never log tokens, passwords or API keys.
 - **Versions belong to the Release workflow** (Actions → Release). Never edit
   `version` in `package.json` or in the manifest, nor the `docker_image` tag,
-  by hand — except on the README's hand-pushed tag path, which bumps all three
-  together before tagging. `test/manifest.test.js` checks they agree.
+  by hand. `test/manifest.test.js` checks they agree.
 - **Changelog.** Every user-visible change adds a line under `## [Unreleased]`
   in `CHANGELOG.md` (`### Added`, `Changed`, `Fixed`, `Removed`, `Security`).
   Never write a version heading: the Release workflow moves the section, and it
@@ -70,8 +80,9 @@ test/                             node --test, against the SDK's fake Gladys (in
   `type: "provider"`: 5.1.0). `test/manifest.test.js` ties the manifest to the
   code (defaults, action, scene and widget handlers): change both sides
   together.
-- **User-facing text** is bilingual (English and French): action messages,
-  manifest texts, and `docs/en.md` / `docs/fr.md`, kept in sync.
+- **User-facing text** exists in English, French, German and Spanish: action
+  messages, manifest texts, widget contents, feature names, and
+  `docs/{en,fr,de,es}.md` with the same sections. `test/i18n.test.js` checks it.
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why,
   in English. Tests never touch the network.
 
@@ -233,3 +244,49 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+## Stellantis (cette intégration)
+
+- **API** : « Connected Car » v4, `https://api.groupe-psa.com/connectedcar/v4/user/vehicles` puis
+  `…/vehicles/{id}/status`, en-têtes `Authorization: Bearer`, `x-introspect-realm: <realm de la
+marque>`, requête `client_id` + `locale`. Endpoints, en-têtes et identifiants publics des
+  applications par pays : `andreadegiovine/homeassistant-stellantis-vehicles` (MIT, `const.py`,
+  `configs.json` → `src/stellantis/apps.json`). Deux formes de réponse coexistent : `energies[]`
+  avec `extension.electric.charging` (actuelle) et `energy[]` avec `charging` (ancienne,
+  `preconditionning` avec deux n) : lire les deux.
+- **Connexion** : OAuth2 « authorization code » de l'application mobile de la marque. La page finit
+  sur `mymap://…` (Peugeot), `mymacsdk://` (Citroën), `mymdssdk://` (DS), `mymopsdk://` (Opel),
+  `mymvxsdk://` (Vauxhall) : le navigateur ne l'ouvre pas, l'utilisateur copie la ligne de la console
+  (« Failed to launch 'mymap://…' » sous Chrome/Edge, « Prevented navigation to “mymap://…” » sous
+  Firefox) ou l'en-tête `location` de l'onglet Réseau. Bouton **Connecter** = champ `account_link`
+  (`onOAuthAuthorizeUrl`, lit la configuration **enregistrée**), action `finish_sign_in` qui reçoit
+  le texte collé (`src/stellantis/code.js` en extrait le code). Le code ne sert qu'une fois et
+  expire vite (environ deux minutes, durée par défaut de ForgeRock AM, non vérifiée).
+- Échange et renouvellement du jeton : `POST <idpcvs>/am/oauth2/access_token`, paramètres **dans la
+  query string** comme l'application, `Authorization: Basic base64(client_id:client_secret)`. Le
+  jeton d'accès dure environ une heure ; le refresh token **change à chaque renouvellement** : il est
+  écrit dans `/data` aussitôt (sinon un redémarrage perd la session). Un renouvellement à la fois
+  (promesse partagée). Un `invalid_grant` au renouvellement = session finie (blocage, message
+  « reconnectez-vous ») ; une panne réseau garde le refresh token.
+- **Les commandes à distance passent par MQTT** (`mwa.mpsa.com:8885`, jeton obtenu avec un OTP
+  « Inwebo » de `otp.mpsa.com`, enrôlé par code SMS + PIN de l'application). La seule implémentation
+  ouverte de cet OTP vient de `flobz/psa_car_controller` (GPL-3.0) ; celle de l'intégration Home
+  Assistant en est une copie (« OTP step its a fork ») malgré la licence MIT du dépôt. Ne rien en
+  recopier dans ce dépôt Apache-2.0. Un enrôlement raté peut bloquer le PIN (`NOK_BLOCKED`) ou
+  épuiser les appareils du compte (`NOK:MAXNBTOOLS`) : à ne développer qu'avec un compte de test.
+  Le réveil de la voiture (`/VehCharge/state`) est lui aussi une commande MQTT.
+- `charging.chargingRate` est en **km d'autonomie par heure**, pas en kW : publié en
+  `speed-sensor/decimal` (`kilometer-per-hour`), la seule catégorie qui accepte cette unité.
+- Une batterie > 90 % avec une autonomie de 0 est un artefact de voiture endormie (Home Assistant,
+  PR #476) : ignoré. Un kilométrage de 0 aussi.
+- La marque, le pays et la motorisation (`motorization` : Electric, Hybrid, Thermic, Hydrogen ; à
+  défaut `engine[].class`) décident des fonctionnalités ; les valeurs facultatives apparaissent une
+  fois vues (`store.vehicle(vin).seen`).
+- Le magasin n'a pas de catégorie « véhicules » : `energy`, comme gladys-renault.
+- Les images de la documentation sont liées en URL absolue `raw.githubusercontent.com` : le cœur
+  résout les liens relatifs contre l'adresse du doc ré-hébergé par le store, où les images ne sont
+  pas.
+- `test/i18n.test.js` refuse « Sie » en début de phrase allemande même au sens de « elle/ils » :
+  reformuler (« Entwickelt wurde sie… »).
+- Le proxy des sessions de code refuse `idpcvs.*` et `api.groupe-psa.com` : `scripts/probe.mjs`
+  se lance ailleurs.

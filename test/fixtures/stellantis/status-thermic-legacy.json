@@ -1,0 +1,16 @@
+{
+  "updatedAt": "2026-10-12T19:02:31Z",
+  "lastPosition": {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [4.83566, 45.76404, 172] },
+    "properties": { "updatedAt": "2026-10-12T19:02:31Z", "heading": 126, "type": "Estimated" }
+  },
+  "preconditionning": {
+    "airConditioning": { "updatedAt": "2026-10-12T19:02:31Z", "status": "Disabled" }
+  },
+  "energy": [{ "updatedAt": "2026-10-12T19:02:31Z", "type": "Fuel", "level": 42, "autonomy": 515 }],
+  "battery": { "voltage": 99, "current": 0, "createdAt": "2026-10-12T19:02:31Z" },
+  "kinetic": { "createdAt": "2026-10-12T19:02:31Z", "moving": false },
+  "privacy": { "createdAt": "2026-10-12T19:02:31Z", "state": "None" },
+  "odometer": { "createdAt": null, "mileage": 61107.1 }
+}

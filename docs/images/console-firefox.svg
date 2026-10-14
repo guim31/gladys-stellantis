@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240" font-family="Menlo, Consolas, monospace" font-size="13">
+  <title>Schematic: the Console of Firefox developer tools after the sign-in</title>
+  <rect width="900" height="240" fill="#ffffff" stroke="#c8ccd0"/>
+  <rect width="900" height="34" fill="#f0f0f4"/>
+  <text x="16" y="22" fill="#5b5b66">Inspector</text>
+  <rect x="100" y="0" width="80" height="34" fill="#ffffff"/>
+  <rect x="100" y="31" width="80" height="3" fill="#0061e0"/>
+  <text x="112" y="22" fill="#0061e0" font-weight="bold">Console</text>
+  <text x="200" y="22" fill="#5b5b66">Debugger</text>
+  <text x="290" y="22" fill="#5b5b66">Network</text>
+  <rect x="0" y="34" width="900" height="30" fill="#ffffff" stroke="#e0e0e6"/>
+  <text x="16" y="54" fill="#5b5b66">Filter Output</text>
+  <rect x="0" y="64" width="900" height="50" fill="#fff4f4" stroke="#f5c2c0"/>
+  <text x="16" y="94" fill="#a4000f">Prevented navigation to “mymap://oauth2redirect/fr?code=<tspan font-weight="bold" fill="#000000" style="text-decoration:underline">AbCdEf123-YOUR_CODE-xyz</tspan>&amp;scope=…” due to an unknown protocol.</text>
+  <rect x="470" y="136" width="414" height="86" rx="6" fill="#e8f0fe" stroke="#0061e0"/>
+  <text x="486" y="160" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">Copy the address between the quotation marks</text>
+  <text x="486" y="180" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">(or the whole line) and paste it in “Finish the</text>
+  <text x="486" y="200" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">sign-in”. Turn on “Persist Logs” if the line</text>
+  <text x="486" y="220" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">disappears when the page changes.</text>
+</svg>

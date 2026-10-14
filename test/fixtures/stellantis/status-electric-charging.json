@@ -1,0 +1,59 @@
+{
+  "createdAt": "2026-10-13T08:01:00Z",
+  "updatedAt": "2026-10-13T08:00:42Z",
+  "battery": { "voltage": 86, "createdAt": "2026-10-13T08:00:42Z" },
+  "doorsState": {
+    "createdAt": "2026-10-13T07:52:10Z",
+    "lockedStates": ["Locked"],
+    "opening": [
+      { "identifier": "Driver", "state": "Closed" },
+      { "identifier": "Passenger", "state": "Closed" },
+      { "identifier": "RearLeft", "state": "Closed" },
+      { "identifier": "RearRight", "state": "Closed" },
+      { "identifier": "Trunk", "state": "Closed" }
+    ]
+  },
+  "energies": [
+    {
+      "type": "Electric",
+      "subType": "ElectricBattery",
+      "level": 54,
+      "autonomy": 182,
+      "updatedAt": "2026-10-13T08:00:42Z",
+      "extension": {
+        "electric": {
+          "battery": {
+            "load": { "capacity": 46000, "residual": 24840 },
+            "health": { "capacity": 97, "resistance": 100 }
+          },
+          "charging": {
+            "plugged": true,
+            "status": "InProgress",
+            "remainingTime": "PT1H35M",
+            "chargingRate": 38,
+            "chargingMode": "Slow",
+            "nextDelayedTime": "PT22H30M",
+            "type": "Full"
+          }
+        }
+      }
+    }
+  ],
+  "environment": {
+    "air": { "temp": 12.5, "createdAt": "2026-10-13T08:00:42Z" },
+    "luminosity": { "day": true, "createdAt": "2026-10-13T08:00:42Z" }
+  },
+  "ignition": { "type": "Stop", "createdAt": "2026-10-13T07:51:58Z" },
+  "kinetic": { "moving": false, "speed": 0, "createdAt": "2026-10-13T07:51:58Z" },
+  "lastPosition": {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [2.35222, 48.85661, 35] },
+    "properties": { "type": "Acquire", "signalQuality": 9, "createdAt": "2026-10-13T07:52:10Z" }
+  },
+  "odometer": { "mileage": 12345.6, "createdAt": "2026-10-13T07:51:58Z" },
+  "preconditioning": {
+    "airConditioning": { "status": "Disabled", "updatedAt": "2026-10-13T07:52:10Z" }
+  },
+  "privacy": { "state": "None", "createdAt": "2026-10-13T07:52:10Z" },
+  "service": { "type": "Electric", "updatedAt": "2026-10-13T07:52:10Z" }
+}

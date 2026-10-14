@@ -1,67 +1,239 @@
-# Template de démonstration
+# Peugeot / Citroën / DS / Opel
 
-Ceci est la documentation utilisateur de l'intégration. Gladys ré-héberge ce
-fichier et affiche un lien **Documentation** permanent vers lui dans l'écran
-de configuration (dans la langue de l'utilisateur, avec l'anglais en repli) —
-c'est au moment de configurer que l'utilisateur en a le plus besoin. Gardez
-les courtes indications d'accueil dans les blocs `section` du `config_schema`
-du manifest ; mettez ici le pas-à-pas détaillé (captures d'écran, dépannage…).
+Suivez vos voitures Peugeot, Citroën, DS, Opel et Vauxhall dans Gladys : batterie, autonomie,
+charge, carburant, kilométrage, verrouillage. L'intégration se connecte à votre compte MyPeugeot,
+MyCitroën, MyDS, MyOpel ou MyVauxhall, comme l'application, et lit l'état que vos voitures ont
+envoyé au cloud Stellantis.
 
-## Ce que vous obtenez
+Cette intégration n'est pas affiliée à Stellantis ni à ses marques. Elle a été développée sans
+voiture ni compte, à partir du travail de la communauté Home Assistant : vos retours sont
+bienvenus, sur le forum ou dans les issues GitHub.
 
-Six appareils de démonstration apparaissent après l'installation : une
-station météo (vraies données Open-Meteo), un interrupteur, une lampe
-variable, une prise connectée avec mesure de puissance, un détecteur de
-mouvement et une caméra.
+## Ce qu'elle fait
+
+- Un appareil Gladys par voiture du compte : électrique, hybride rechargeable ou thermique.
+- Ses valeurs sont lues dans le cloud Stellantis toutes les 15 minutes (au choix de 10 à 60). Une
+  lecture **ne réveille jamais la voiture** : elle renvoie ce que la voiture a envoyé en dernier (à
+  l'arrêt du moteur, pendant la charge, de temps en temps à l'arrêt).
+- Rien n'est encore piloté depuis Gladys : préconditionnement, charge et verrouillage sont
+  affichés, pas commandés (voir [Limites](#limites)).
+- La position GPS est désactivée par défaut ; vous l'activez dans la configuration.
+
+## Prérequis
+
+- Une voiture du groupe Stellantis (Peugeot, Citroën, DS, Opel, Vauxhall) avec services connectés,
+  déjà ajoutée dans l'application de la marque (MyPeugeot, MyCitroën, MyDS, MyOpel, MyVauxhall) et
+  dont l'état s'y affiche.
+- L'adresse e-mail et le mot de passe du compte de cette application.
+- Un **ordinateur** avec Chrome, Edge, Firefox ou Safari pour la connexion (une fois, puis
+  seulement si la session prend fin) : le code se lit dans les outils de développement du
+  navigateur.
+- Gladys 5.1 ou plus récent, avec accès à Internet.
+
+Fiat, Jeep, Alfa Romeo et les autres marques du groupe passent par d'autres applications et un
+autre cloud : elles ne sont pas couvertes.
 
 ## Configuration
 
-1. Ouvrez l'onglet **Configuration** de l'intégration.
-2. Renseignez la **latitude** et la **longitude** que la station météo de
-   démonstration doit observer (Paris par défaut), et choisissez votre unité
-   de température. L'**intervalle de rafraîchissement** règle la fréquence
-   de lecture de la station météo et de la puissance de la prise : toutes
-   les 5 minutes par défaut, toutes les minutes au plus.
-3. Enregistrez : les appareils apparaissent dans l'onglet **Découverte**,
-   prêts à être ajoutés.
+Ouvrez **Intégrations**, trouvez **Peugeot / Citroën / DS / Opel** et ouvrez l'onglet
+**Configuration**.
 
-Le réglage **Préférer la connexion locale** pilote la prise de
-démonstration : elle affiche en badge le canal réellement utilisé (local ou
-cloud), avec un point orange quand elle fonctionne en mode dégradé (local
-refusé, bascule cloud).
+### 1. Application et pays
 
-## Actions
+| Réglage                     | Que choisir                                                                                    |
+| --------------------------- | ---------------------------------------------------------------------------------------------- |
+| Application de la voiture   | L'application que vous utilisez : MyPeugeot, MyCitroën, MyDS, MyOpel ou MyVauxhall.            |
+| Pays du compte              | Le pays choisi dans l'application. Vauxhall n'existe qu'au Royaume-Uni.                        |
+| Langue des noms d'appareils | Langue des noms de fonctionnalités des nouveaux appareils (français par défaut).               |
+| Relevé                      | Fréquence de lecture du cloud : 10, 15 (par défaut), 30 ou 60 minutes.                         |
+| Position GPS                | Désactivée par défaut. Activée : la dernière position envoyée s'affiche, avec un bouton Carte. |
 
-- **Tester le fournisseur météo** — effectue une requête en direct vers
-  Open-Meteo et affiche la température et l'humidité actuelles sous le
-  bouton.
-- **Identifier un appareil** — choisissez un de vos appareils dans la liste
-  et il se signale (la lampe de démonstration « clignote » dans les logs).
+**Enregistrez** avant de vous connecter : la page de connexion dépend de l'application et du pays.
 
-## Scènes
+### Connexion
 
-L'intégration ajoute ses propres cartes à l'éditeur de scènes (Gladys 5.1
-ou plus récent), dans la catégorie **Intégrations** :
+La page de connexion des marques est faite pour leur application mobile : à la fin, elle remet un
+code à l'application par une adresse que seule l'application ouvre (`mymap://…` pour MyPeugeot,
+`mymacsdk://…` pour MyCitroën, `mymdssdk://…` pour MyDS, `mymopsdk://…` pour MyOpel,
+`mymvxsdk://…` pour MyVauxhall). Sur un ordinateur, le navigateur ne sait pas l'ouvrir et semble ne
+rien faire, mais l'adresse, avec le code, apparaît dans ses outils de développement. Vous la copiez
+dans Gladys.
 
-- **Mouvement détecté** (déclencheur) — lance la scène quand un détecteur
-  de démonstration voit bouger quelque chose. Choisissez éventuellement le
-  détecteur et ce qui a bougé (personne, animal) ; laissés vides, toute
-  détection correspond. Les actions suivantes peuvent lire ce qui a bougé
-  avec `{{triggerEvent.data.target}}`.
-- **Identifier un appareil** (action) — fait se signaler l'appareil choisi.
-  Elle indique si l'appareil a pu se signaler, pour que les actions
-  suivantes puissent en dépendre.
+1. Cliquez sur **Connecter** (champ « Compte de l'application ») : la page de connexion de la
+   marque s'ouvre dans un nouvel onglet.
+2. Dans cet onglet, ouvrez les outils de développement **avant de vous connecter** : `F12`, ou
+   `Ctrl+Maj+I` (`Cmd+Option+I` sur Mac). Choisissez l'onglet **Console**.
+3. Connectez-vous avec l'adresse e-mail et le mot de passe de l'application, et acceptez si la page
+   le demande.
+4. La page semble ne rien faire : c'est normal. Copiez la ligne de la console qui contient `code=`
+   (voir ci-dessous, navigateur par navigateur).
+5. Dans les deux minutes (le code expire vite et ne sert qu'une fois), collez-la dans l'action
+   **Terminer la connexion** en bas de la page de configuration, et cliquez dessus.
+6. L'action répond « Connecté : N véhicule(s) ». Ouvrez l'onglet **Découverte** et ajoutez vos
+   voitures.
 
-## Tableau de bord
+Gladys ne voit jamais votre mot de passe : il est saisi sur la page de la marque. Le code est
+échangé contre une session qui se renouvelle seule ; elle est conservée dans le stockage de
+l'intégration.
 
-Ajoutez le widget **État de la démo** à un tableau de bord : il affiche en
-direct la température de la station météo et la puissance de la prise du
-bureau, la connexion utilisée par la prise (en orange si dégradée) et la
-position observée. Son bouton **Identifier la lampe** fait se signaler la
-lampe de démonstration.
+### Chrome et Edge
+
+Dans l'onglet **Console**, une ligne rouge apparaît après la connexion :
+`Failed to launch 'mymap://oauth2redirect/fr?code=…&scope=…' because the scheme does not have a registered handler.`
+Copiez toute la ligne, ou seulement l'adresse entre les apostrophes.
+
+![Console de Chrome ou Edge : la ligne rouge qui contient le code](https://raw.githubusercontent.com/guim31/gladys-stellantis/main/docs/images/console-chrome.svg)
+
+Pas de ligne ? Ouvrez l'onglet **Network** (Réseau), cochez **Preserve log** (Conserver le
+journal), reconnectez-vous depuis l'étape 1, puis cliquez sur la dernière requête (statut 302, ou
+celle en rouge nommée `oauth2redirect…`) et copiez l'adresse de son en-tête `location`, ou son URL.
+
+![Onglet Réseau : la dernière requête et son en-tête location](https://raw.githubusercontent.com/guim31/gladys-stellantis/main/docs/images/network-tab.svg)
+
+### Firefox
+
+Dans la **Console**, Firefox écrit :
+`Prevented navigation to “mymap://oauth2redirect/fr?code=…” due to an unknown protocol.` (ou son
+équivalent en français). Copiez l'adresse entre les guillemets, ou toute la ligne. Si la console se
+vide quand la page change, activez **Journaux persistants** dans ses paramètres (roue dentée) et
+reconnectez-vous.
+
+![Console de Firefox : la ligne qui contient le code](https://raw.githubusercontent.com/guim31/gladys-stellantis/main/docs/images/console-firefox.svg)
+
+### Safari
+
+Activez d'abord les outils de développement : **Safari → Réglages → Avancés → Afficher les
+fonctionnalités pour les développeurs web**. Puis, dans l'onglet de connexion, **Développement →
+Afficher l'inspecteur web**, onglet **Réseau**, et cochez **Conserver le journal**. Après la
+connexion, cliquez sur la dernière requête et copiez l'adresse `mymap://…` de son en-tête
+`Location`. Safari affiche parfois aussi l'adresse dans un message d'erreur de la page.
+
+### Que coller
+
+Au choix : toute la ligne de la console, l'adresse `mymap://oauth2redirect/fr?code=…`, ou le code
+seul (ce qui suit `code=`, jusqu'au `&`). L'intégration en extrait le code.
+
+Si l'action répond « Code refusé » : le code a déjà servi, a expiré, ou vient d'une autre
+application ou d'un autre pays que ceux enregistrés. Cliquez à nouveau sur **Connecter** et collez
+vite le nouveau code.
+
+Les autres actions : **Tester la connexion** liste les voitures du compte (aucune n'est réveillée) ;
+**Se déconnecter** supprime la session enregistrée (les appareils restent dans Gladys, sans
+nouvelle valeur).
+
+## Appareils
+
+Chaque voiture est un appareil nommé d'après son modèle et la fin de son VIN, par exemple
+`Peugeot e-208 (…0208)` : le VIN complet n'apparaît jamais dans Gladys ni dans les journaux. Une
+voiture reçoit les fonctionnalités que permettent sa motorisation et ses réponses :
+
+| Fonctionnalité            | Voitures                    | Valeur                                                                                                                            |
+| ------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Niveau de batterie        | électriques, hybrides rech. | %                                                                                                                                 |
+| Autonomie électrique      | électriques, hybrides rech. | km                                                                                                                                |
+| État de la charge         | électriques, hybrides rech. | en charge, véhicule connecté (charge terminée), suspendue (véhicule, en attente), suspendue (borne, échec), inactive (débranchée) |
+| Branchée                  | électriques, hybrides rech. | oui / non                                                                                                                         |
+| En charge                 | électriques, hybrides rech. | oui / non                                                                                                                         |
+| Vitesse de charge         | si la voiture l'envoie      | km d'autonomie gagnés par heure (ce qu'affiche l'application ; le cloud ne donne pas de puissance en kW)                          |
+| Temps de charge restant   | si la voiture l'envoie      | minutes (0 hors charge)                                                                                                           |
+| Niveau de carburant       | thermiques, hybrides rech.  | %                                                                                                                                 |
+| Autonomie carburant       | thermiques, hybrides rech.  | km                                                                                                                                |
+| Autonomie totale          | hybrides rechargeables      | km, électrique plus carburant                                                                                                     |
+| Kilométrage               | si la voiture l'envoie      | km                                                                                                                                |
+| Verrouillée               | si la voiture l'envoie      | verrouillée / déverrouillée (une porte déverrouillée compte comme déverrouillée)                                                  |
+| Portière ou coffre ouvert | si la voiture l'envoie      | oui / non                                                                                                                         |
+| Préconditionnement        | si la voiture l'envoie      | en marche / arrêté                                                                                                                |
+| Température extérieure    | si la voiture l'envoie      | °C                                                                                                                                |
+| Position GPS              | si elle est activée         | texte `latitude, longitude`                                                                                                       |
+
+Toutes les fonctionnalités sont en lecture seule. Une valeur qui ne change pas est renvoyée deux
+fois par jour, pour que Gladys la montre toujours comme récente. Une valeur que la voiture cesse
+d'envoyer garde son dernier état.
+
+## Widget
+
+**Ma voiture (Stellantis)** montre une voiture : tuiles batterie (ou carburant) et autonomie, puis
+une liste avec la charge (avec sa vitesse et l'heure de fin prévue pendant la charge), les portes,
+le préconditionnement et l'heure du dernier relevé. Son bouton **Actualiser** relit le cloud (sans
+réveiller la voiture) ; un bouton **Carte** apparaît quand la position GPS est activée. Choisissez la
+voiture dans les réglages du widget.
+
+## Déclencheur de scène
+
+**Charge terminée** se déclenche quand une voiture signale une charge complète après une charge en
+cours. Une charge arrêtée, en échec ou interrompue en débranchant ne le déclenche pas. Ses
+variables : le niveau de batterie (%) et l'autonomie électrique (km). Laissez le filtre de véhicule
+vide pour toutes les voitures.
+
+Branchée, débranchée, batterie faible : utilisez les valeurs de l'appareil dans une scène
+(déclencheur « valeur d'un appareil », par exemple _Niveau de batterie_ inférieur à 20 avec
+« seulement au franchissement du seuil ») : aucun déclencheur dédié n'est nécessaire.
+
+## Action de scène
+
+**Relire une voiture Stellantis** lit tout de suite l'état que la voiture a envoyé au cloud, et
+donne aux actions suivantes son niveau de batterie, son niveau de carburant, son autonomie totale et
+ses valeurs branchée, en charge et verrouillée. Elle ne réveille pas la voiture.
+
+## Exemples de scènes
+
+- **Rappel de charge** : chaque soir à 21 h, _Relire une voiture Stellantis_, puis si le niveau de
+  batterie est inférieur à 30 % et que la voiture n'est pas branchée, envoyer « Pensez à brancher la
+  voiture » à la famille.
+- **Charge terminée** : déclencheur _Charge terminée_, envoyer « La voiture est chargée :
+  {{triggerEvent.data.battery_level}} %, {{triggerEvent.data.range_km}} km ».
+- **Voiture restée ouverte** : déclencheur _Verrouillée_ passe à « déverrouillée », attendre
+  10 minutes, puis si elle l'est toujours, envoyer une notification.
+
+## Relevés et quotas
+
+L'intégration lit le cloud avec son propre minuteur (un appel par voiture et par relevé, plus un
+renouvellement de la session environ une fois par heure), jamais par le sondage de Gladys.
+Stellantis ne publie aucun quota pour cette API ; l'intégration Home Assistant lit toutes les
+minutes sans problème connu. Si le cloud répond « trop de requêtes », les relevés s'arrêtent
+30 minutes. Une panne du cloud est retentée après 1, 2, 5, 10 puis toutes les 15 minutes.
 
 ## Dépannage
 
-L'intégration journalise tout ce qu'elle fait : consultez les logs de
-l'intégration depuis l'interface Gladys (ou `docker logs` sur l'hôte) avec
-`LOG_LEVEL=debug` pour le détail complet.
+- **« Pas connecté »** : la connexion n'a pas été terminée. Suivez [Connexion](#connexion).
+- **« Code refusé »** : le code sert une fois, deux minutes environ, pour l'application et le pays
+  enregistrés. Cliquez à nouveau sur **Connecter**, puis collez vite.
+- **« Aucun code trouvé »** : collez la ligne ou l'adresse qui contient `code=`.
+- **« L'application de cette marque n'existe pas dans ce pays »** : choisissez le pays de votre
+  compte (Vauxhall : Royaume-Uni).
+- **« La session Stellantis a pris fin »** : la session a été refusée à son renouvellement (mot de
+  passe changé, compte réinitialisé, long arrêt de Gladys). Reconnectez-vous ; les appareils et leur
+  historique restent.
+- **Pas de ligne dans la console** : les outils de développement ont été ouverts après la
+  connexion. Ouvrez-les avant, ou passez par l'onglet Réseau avec « Conserver le journal », et
+  reconnectez-vous.
+- **Une voiture n'a pas de valeur, ou de vieilles valeurs** : l'application montre la même chose :
+  la voiture envoie son état à l'arrêt du moteur, pendant la charge et de temps en temps ; une
+  voiture inutilisée depuis des jours en envoie moins (sa batterie 12 V est protégée). Une voiture
+  en **mode confidentialité** ne partage rien : le widget l'indique.
+- **Journaux** : l'intégration n'écrit que son cycle de vie au niveau info. Réglez
+  `LOG_LEVEL=debug` pour voir chaque relevé. Jetons, codes, VIN et positions ne sont jamais écrits.
+
+## Limites
+
+- **Pas encore de commande à distance** : le préconditionnement, le démarrage ou l'arrêt de la
+  charge, la limite de charge, le verrouillage, le déverrouillage et le réveil de la voiture passent
+  par un autre service Stellantis (MQTT) qui demande un enrôlement par code SMS et le code PIN de
+  l'application. Les seules implémentations ouvertes de cet enrôlement sont sous licence GPL ; cette
+  intégration, sous Apache 2.0, ne les recopie pas. Elles pourront venir dans une version suivante.
+- **Lecture de l'état du cloud seulement** : pas de « réveiller et relire ». Les valeurs sont aussi
+  récentes que le dernier message de la voiture.
+- **Connexion par copie d'un code** : Stellantis ne donne pas d'accès à son API aux particuliers,
+  l'intégration se connecte comme l'application de la marque ; si Stellantis change la connexion de
+  l'application, l'intégration peut cesser de fonctionner jusqu'à sa mise à jour.
+- **Vitesse de charge en km/h** : le cloud ne donne pas de puissance en kW.
+- Développée et testée sans voiture ni compte, sur des réponses construites d'après l'intégration
+  Home Assistant : merci de signaler ce que vous observez.
+
+## Crédits
+
+- [andreadegiovine/homeassistant-stellantis-vehicles](https://github.com/andreadegiovine/homeassistant-stellantis-vehicles)
+  (MIT) : la connexion de chaque application, les identifiants des applications par pays, les
+  appels à l'API et le sens des champs.
+- [flobz/psa_car_controller](https://github.com/flobz/psa_car_controller) (GPL-3.0) : lu pour
+  comprendre l'API et ses commandes à distance ; rien n'en est recopié ici.

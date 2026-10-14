@@ -1,0 +1,909 @@
+{
+  "peugeot": {
+    "app": "MyPeugeot",
+    "brand": "Peugeot",
+    "oauth_url": "https://idpcvs.peugeot.com",
+    "realm": "clientsB2CPeugeot",
+    "scheme": "mymap",
+    "clients": [
+      {
+        "client_id": "1eebc2d5-5df3-459b-a624-20abfcf82530",
+        "client_secret": "T5tP7iS0cO8sC0lA2iE2aR7gK6uE5rF3lJ8pC3nO1pR7tL8vU1"
+      },
+      {
+        "client_id": "4166e1cd-f2c1-4a8b-af4a-889a43ed06bd",
+        "client_secret": "bG5vK6vX5xK6gF2pF6mW0sY0xY5vF4kM6nL2eT4uI6bN0bF3tF"
+      }
+    ],
+    "countries": {
+      "AR": {
+        "locale": "es-AR",
+        "client": 0
+      },
+      "AT": {
+        "locale": "de-AT",
+        "client": 0
+      },
+      "AU": {
+        "locale": "en-AU",
+        "client": 0
+      },
+      "BE": {
+        "locale": "fr-BE",
+        "client": 0
+      },
+      "BG": {
+        "locale": "bg-BG",
+        "client": 0
+      },
+      "BR": {
+        "locale": "pt-BR",
+        "client": 1
+      },
+      "CH": {
+        "locale": "fr-CH",
+        "client": 0
+      },
+      "CL": {
+        "locale": "es-CL",
+        "client": 1
+      },
+      "CO": {
+        "locale": "es-CO",
+        "client": 0
+      },
+      "CY": {
+        "locale": "en-CY",
+        "client": 0
+      },
+      "CZ": {
+        "locale": "cs-CZ",
+        "client": 0
+      },
+      "DE": {
+        "locale": "de-DE",
+        "client": 0
+      },
+      "DK": {
+        "locale": "da-DK",
+        "client": 0
+      },
+      "DZ": {
+        "locale": "fr-DZ",
+        "client": 0
+      },
+      "EE": {
+        "locale": "et-EE",
+        "client": 0
+      },
+      "ES": {
+        "locale": "es-ES",
+        "client": 0
+      },
+      "FI": {
+        "locale": "fi-FI",
+        "client": 0
+      },
+      "FR": {
+        "locale": "fr-FR",
+        "client": 0
+      },
+      "GB": {
+        "locale": "en-GB",
+        "client": 0
+      },
+      "GF": {
+        "locale": "fr-GF",
+        "client": 0
+      },
+      "GP": {
+        "locale": "fr-GP",
+        "client": 0
+      },
+      "GR": {
+        "locale": "el-GR",
+        "client": 0
+      },
+      "HR": {
+        "locale": "hr-HR",
+        "client": 0
+      },
+      "HU": {
+        "locale": "hu-HU",
+        "client": 0
+      },
+      "IE": {
+        "locale": "en-IE",
+        "client": 0
+      },
+      "IS": {
+        "locale": "en-IS",
+        "client": 0
+      },
+      "IT": {
+        "locale": "it-IT",
+        "client": 0
+      },
+      "JP": {
+        "locale": "ja-JP",
+        "client": 0
+      },
+      "KR": {
+        "locale": "ko-KR",
+        "client": 0
+      },
+      "LT": {
+        "locale": "lt-LT",
+        "client": 1
+      },
+      "LU": {
+        "locale": "fr-LU",
+        "client": 0
+      },
+      "LV": {
+        "locale": "lv-LV",
+        "client": 1
+      },
+      "MA": {
+        "locale": "fr-MA",
+        "client": 0
+      },
+      "MQ": {
+        "locale": "fr-MQ",
+        "client": 0
+      },
+      "MT": {
+        "locale": "en-MT",
+        "client": 0
+      },
+      "MX": {
+        "locale": "es-MX",
+        "client": 0
+      },
+      "MY": {
+        "locale": "en-MY",
+        "client": 1
+      },
+      "NL": {
+        "locale": "nl-NL",
+        "client": 0
+      },
+      "NO": {
+        "locale": "nb-NO",
+        "client": 0
+      },
+      "NZ": {
+        "locale": "en-NZ",
+        "client": 1
+      },
+      "PE": {
+        "locale": "es-PE",
+        "client": 1
+      },
+      "PH": {
+        "locale": "en-PH",
+        "client": 1
+      },
+      "PL": {
+        "locale": "pl-PL",
+        "client": 1
+      },
+      "PT": {
+        "locale": "pt-PT",
+        "client": 1
+      },
+      "RE": {
+        "locale": "fr-RE",
+        "client": 1
+      },
+      "RO": {
+        "locale": "ro-RO",
+        "client": 1
+      },
+      "RU": {
+        "locale": "ru-RU",
+        "client": 1
+      },
+      "SE": {
+        "locale": "sv-SE",
+        "client": 1
+      },
+      "SG": {
+        "locale": "en-SG",
+        "client": 1
+      },
+      "SI": {
+        "locale": "sl-SI",
+        "client": 1
+      },
+      "SK": {
+        "locale": "sk-SK",
+        "client": 1
+      },
+      "TH": {
+        "locale": "en-TH",
+        "client": 1
+      },
+      "TN": {
+        "locale": "fr-TN",
+        "client": 1
+      },
+      "TR": {
+        "locale": "tr-TR",
+        "client": 1
+      },
+      "TW": {
+        "locale": "en-TW",
+        "client": 1
+      },
+      "UA": {
+        "locale": "uk-UA",
+        "client": 1
+      },
+      "UY": {
+        "locale": "es-UY",
+        "client": 1
+      },
+      "ZA": {
+        "locale": "en-ZA",
+        "client": 1
+      }
+    }
+  },
+  "citroen": {
+    "app": "MyCitroen",
+    "brand": "Citroën",
+    "oauth_url": "https://idpcvs.citroen.com",
+    "realm": "clientsB2CCitroen",
+    "scheme": "mymacsdk",
+    "clients": [
+      {
+        "client_id": "5364defc-80e6-447b-bec6-4af8d1542cae",
+        "client_secret": "iE0cD8bB0yJ0dS6rO3nN1hI2wU7uA5xR4gP7lD6vM0oH0nS8dN"
+      },
+      {
+        "client_id": "49799a4b-f335-4de2-bafb-e198a3f54ef9",
+        "client_secret": "bQ8lW3eC8eG7wG0lN7uR6dE2cY4kW1yD8jJ4tT6aA3qJ5cM3dE"
+      }
+    ],
+    "countries": {
+      "AR": {
+        "locale": "es-AR",
+        "client": 0
+      },
+      "AT": {
+        "locale": "de-AT",
+        "client": 0
+      },
+      "AU": {
+        "locale": "en-AU",
+        "client": 0
+      },
+      "BE": {
+        "locale": "fr-BE",
+        "client": 0
+      },
+      "BG": {
+        "locale": "bg-BG",
+        "client": 0
+      },
+      "BN": {
+        "locale": "en-BN",
+        "client": 0
+      },
+      "BR": {
+        "locale": "pt-BR",
+        "client": 0
+      },
+      "CH": {
+        "locale": "de-CH",
+        "client": 0
+      },
+      "CL": {
+        "locale": "es-CL",
+        "client": 0
+      },
+      "CO": {
+        "locale": "es-CO",
+        "client": 0
+      },
+      "CR": {
+        "locale": "es-CR",
+        "client": 0
+      },
+      "CY": {
+        "locale": "en-CY",
+        "client": 0
+      },
+      "CZ": {
+        "locale": "cs-CZ",
+        "client": 0
+      },
+      "DE": {
+        "locale": "de-DE",
+        "client": 0
+      },
+      "DK": {
+        "locale": "da-DK",
+        "client": 0
+      },
+      "DZ": {
+        "locale": "fr-DZ",
+        "client": 0
+      },
+      "EC": {
+        "locale": "es-EC",
+        "client": 0
+      },
+      "EE": {
+        "locale": "et-EE",
+        "client": 0
+      },
+      "ES": {
+        "locale": "es-ES",
+        "client": 0
+      },
+      "FI": {
+        "locale": "fi-FI",
+        "client": 0
+      },
+      "FR": {
+        "locale": "fr-FR",
+        "client": 0
+      },
+      "GB": {
+        "locale": "en-GB",
+        "client": 0
+      },
+      "GF": {
+        "locale": "fr-GF",
+        "client": 0
+      },
+      "GP": {
+        "locale": "fr-GP",
+        "client": 0
+      },
+      "GR": {
+        "locale": "el-GR",
+        "client": 0
+      },
+      "HR": {
+        "locale": "hr-HR",
+        "client": 0
+      },
+      "HU": {
+        "locale": "hu-HU",
+        "client": 0
+      },
+      "IE": {
+        "locale": "en-IE",
+        "client": 0
+      },
+      "IN": {
+        "locale": "en-IN",
+        "client": 0
+      },
+      "IR": {
+        "locale": "fa-IR",
+        "client": 0
+      },
+      "IS": {
+        "locale": "en-IS",
+        "client": 0
+      },
+      "IT": {
+        "locale": "it-IT",
+        "client": 0
+      },
+      "JP": {
+        "locale": "ja-JP",
+        "client": 1
+      },
+      "KR": {
+        "locale": "ko-KR",
+        "client": 1
+      },
+      "LB": {
+        "locale": "en-LB",
+        "client": 1
+      },
+      "LT": {
+        "locale": "lt-LT",
+        "client": 1
+      },
+      "LU": {
+        "locale": "fr-LU",
+        "client": 1
+      },
+      "LV": {
+        "locale": "lv-LV",
+        "client": 1
+      },
+      "MA": {
+        "locale": "fr-MA",
+        "client": 1
+      },
+      "MQ": {
+        "locale": "fr-MQ",
+        "client": 1
+      },
+      "MT": {
+        "locale": "en-MT",
+        "client": 1
+      },
+      "MY": {
+        "locale": "en-MY",
+        "client": 1
+      },
+      "NC": {
+        "locale": "fr-NC",
+        "client": 1
+      },
+      "NL": {
+        "locale": "nl-NL",
+        "client": 1
+      },
+      "NO": {
+        "locale": "nb-NO",
+        "client": 1
+      },
+      "NZ": {
+        "locale": "en-NZ",
+        "client": 1
+      },
+      "PE": {
+        "locale": "es-PE",
+        "client": 1
+      },
+      "PL": {
+        "locale": "pl-PL",
+        "client": 1
+      },
+      "PT": {
+        "locale": "pt-PT",
+        "client": 1
+      },
+      "PY": {
+        "locale": "es-PY",
+        "client": 1
+      },
+      "RE": {
+        "locale": "fr-RE",
+        "client": 1
+      },
+      "RO": {
+        "locale": "ro-RO",
+        "client": 1
+      },
+      "RS": {
+        "locale": "sr-RS",
+        "client": 1
+      },
+      "RU": {
+        "locale": "ru-RU",
+        "client": 1
+      },
+      "SE": {
+        "locale": "sv-SE",
+        "client": 1
+      },
+      "SG": {
+        "locale": "en-SG",
+        "client": 1
+      },
+      "SI": {
+        "locale": "sl-SI",
+        "client": 1
+      },
+      "SK": {
+        "locale": "sk-SK",
+        "client": 1
+      },
+      "TN": {
+        "locale": "fr-TN",
+        "client": 1
+      },
+      "TR": {
+        "locale": "tr-TR",
+        "client": 1
+      },
+      "TW": {
+        "locale": "zh-TW",
+        "client": 1
+      },
+      "UA": {
+        "locale": "uk-UA",
+        "client": 1
+      },
+      "UY": {
+        "locale": "es-UY",
+        "client": 1
+      },
+      "ZA": {
+        "locale": "en-ZA",
+        "client": 1
+      }
+    }
+  },
+  "ds": {
+    "app": "MyDS",
+    "brand": "DS",
+    "oauth_url": "https://idpcvs.driveds.com",
+    "realm": "clientsB2CDS",
+    "scheme": "mymdssdk",
+    "clients": [
+      {
+        "client_id": "cbf74ee7-a303-4c3d-aba3-29f5994e2dfa",
+        "client_secret": "X6bE6yQ3tH1cG5oA6aW4fS6hK0cR0aK5yN2wE4hP8vL8oW5gU3"
+      },
+      {
+        "client_id": "ce43f260-dea6-4471-a473-96950d1ccf67",
+        "client_secret": "wL5fV7sV5cP1lV2lJ2pR0qS7nL2uU8fI8wF3fE8dA7bX5fT3qU"
+      }
+    ],
+    "countries": {
+      "AR": {
+        "locale": "es-AR",
+        "client": 0
+      },
+      "AT": {
+        "locale": "de-AT",
+        "client": 0
+      },
+      "BE": {
+        "locale": "fr-BE",
+        "client": 0
+      },
+      "BG": {
+        "locale": "bg-BG",
+        "client": 0
+      },
+      "BN": {
+        "locale": "en-BN",
+        "client": 0
+      },
+      "CH": {
+        "locale": "de-CH",
+        "client": 0
+      },
+      "CL": {
+        "locale": "es-CL",
+        "client": 0
+      },
+      "CO": {
+        "locale": "es-CO",
+        "client": 0
+      },
+      "CZ": {
+        "locale": "cs-CZ",
+        "client": 0
+      },
+      "DE": {
+        "locale": "de-DE",
+        "client": 0
+      },
+      "DK": {
+        "locale": "da-DK",
+        "client": 0
+      },
+      "ES": {
+        "locale": "es-ES",
+        "client": 0
+      },
+      "FI": {
+        "locale": "fi-FI",
+        "client": 0
+      },
+      "FR": {
+        "locale": "fr-FR",
+        "client": 0
+      },
+      "GB": {
+        "locale": "en-GB",
+        "client": 0
+      },
+      "GF": {
+        "locale": "fr-GF",
+        "client": 0
+      },
+      "GP": {
+        "locale": "fr-GP",
+        "client": 0
+      },
+      "GR": {
+        "locale": "el-GR",
+        "client": 0
+      },
+      "HR": {
+        "locale": "hr-HR",
+        "client": 0
+      },
+      "HU": {
+        "locale": "hu-HU",
+        "client": 0
+      },
+      "IE": {
+        "locale": "en-IE",
+        "client": 0
+      },
+      "IT": {
+        "locale": "it-IT",
+        "client": 0
+      },
+      "JP": {
+        "locale": "ja-JP",
+        "client": 0
+      },
+      "KR": {
+        "locale": "ko-KR",
+        "client": 0
+      },
+      "LU": {
+        "locale": "fr-LU",
+        "client": 0
+      },
+      "MA": {
+        "locale": "fr-MA",
+        "client": 0
+      },
+      "MQ": {
+        "locale": "fr-MQ",
+        "client": 0
+      },
+      "MY": {
+        "locale": "en-MY",
+        "client": 0
+      },
+      "NC": {
+        "locale": "fr-NC",
+        "client": 0
+      },
+      "NL": {
+        "locale": "nl-NL",
+        "client": 0
+      },
+      "NO": {
+        "locale": "nb-NO",
+        "client": 0
+      },
+      "PL": {
+        "locale": "pl-PL",
+        "client": 0
+      },
+      "PT": {
+        "locale": "pt-PT",
+        "client": 0
+      },
+      "RE": {
+        "locale": "fr-RE",
+        "client": 1
+      },
+      "RO": {
+        "locale": "ro-RO",
+        "client": 1
+      },
+      "RU": {
+        "locale": "ru-RU",
+        "client": 1
+      },
+      "SE": {
+        "locale": "sv-SE",
+        "client": 1
+      },
+      "SG": {
+        "locale": "en-SG",
+        "client": 1
+      },
+      "SI": {
+        "locale": "sl-SI",
+        "client": 1
+      },
+      "SK": {
+        "locale": "sk-SK",
+        "client": 1
+      },
+      "TN": {
+        "locale": "fr-TN",
+        "client": 1
+      },
+      "TR": {
+        "locale": "tr-TR",
+        "client": 1
+      }
+    }
+  },
+  "opel": {
+    "app": "MyOpel",
+    "brand": "Opel",
+    "oauth_url": "https://idpcvs.opel.com",
+    "realm": "clientsB2COpel",
+    "scheme": "mymopsdk",
+    "clients": [
+      {
+        "client_id": "07364655-93cb-4194-8158-6b035ac2c24c",
+        "client_secret": "F2kK7lC5kF5qN7tM0wT8kE3cW1dP0wC5pI6vC0sQ5iP5cN8cJ8"
+      },
+      {
+        "client_id": "a009239a-ed2a-49f9-9e6f-3f59703d469d",
+        "client_secret": "M5yW4sE5qU6pO6jO4vH2qE0qS6gH6lR6cJ6kW1pE5cM6nM7sS0"
+      }
+    ],
+    "countries": {
+      "AT": {
+        "locale": "de-AT",
+        "client": 0
+      },
+      "BE": {
+        "locale": "fr-BE",
+        "client": 0
+      },
+      "BG": {
+        "locale": "bg-BG",
+        "client": 0
+      },
+      "CH": {
+        "locale": "fr-CH",
+        "client": 0
+      },
+      "CZ": {
+        "locale": "cs-CZ",
+        "client": 0
+      },
+      "DE": {
+        "locale": "de-DE",
+        "client": 0
+      },
+      "DK": {
+        "locale": "da-DK",
+        "client": 0
+      },
+      "EE": {
+        "locale": "et-EE",
+        "client": 1
+      },
+      "ES": {
+        "locale": "es-ES",
+        "client": 0
+      },
+      "FI": {
+        "locale": "fi-FI",
+        "client": 0
+      },
+      "FR": {
+        "locale": "fr-FR",
+        "client": 0
+      },
+      "GF": {
+        "locale": "fr-GF",
+        "client": 0
+      },
+      "GP": {
+        "locale": "fr-GP",
+        "client": 0
+      },
+      "GR": {
+        "locale": "el-GR",
+        "client": 0
+      },
+      "HR": {
+        "locale": "hr-HR",
+        "client": 0
+      },
+      "HU": {
+        "locale": "hu-HU",
+        "client": 0
+      },
+      "IE": {
+        "locale": "en-IE",
+        "client": 0
+      },
+      "IS": {
+        "locale": "en-IS",
+        "client": 0
+      },
+      "IT": {
+        "locale": "it-IT",
+        "client": 0
+      },
+      "JP": {
+        "locale": "ja-JP",
+        "client": 0
+      },
+      "LT": {
+        "locale": "lt-LT",
+        "client": 1
+      },
+      "LU": {
+        "locale": "fr-LU",
+        "client": 0
+      },
+      "LV": {
+        "locale": "lv-LV",
+        "client": 1
+      },
+      "MQ": {
+        "locale": "fr-MQ",
+        "client": 0
+      },
+      "MT": {
+        "locale": "en-MT",
+        "client": 1
+      },
+      "NL": {
+        "locale": "nl-NL",
+        "client": 0
+      },
+      "NO": {
+        "locale": "nb-NO",
+        "client": 0
+      },
+      "NZ": {
+        "locale": "en-NZ",
+        "client": 1
+      },
+      "PL": {
+        "locale": "pl-PL",
+        "client": 0
+      },
+      "PT": {
+        "locale": "pt-PT",
+        "client": 0
+      },
+      "RE": {
+        "locale": "fr-RE",
+        "client": 0
+      },
+      "RO": {
+        "locale": "ro-RO",
+        "client": 0
+      },
+      "RU": {
+        "locale": "ru-RU",
+        "client": 0
+      },
+      "SE": {
+        "locale": "sv-SE",
+        "client": 0
+      },
+      "SG": {
+        "locale": "en-SG",
+        "client": 0
+      },
+      "SI": {
+        "locale": "sl-SI",
+        "client": 0
+      },
+      "SK": {
+        "locale": "sk-SK",
+        "client": 0
+      },
+      "TR": {
+        "locale": "tr-TR",
+        "client": 0
+      },
+      "TW": {
+        "locale": "zh-TW",
+        "client": 1
+      }
+    }
+  },
+  "vauxhall": {
+    "app": "MyVauxhall",
+    "brand": "Vauxhall",
+    "oauth_url": "https://idpcvs.vauxhall.co.uk",
+    "realm": "clientsB2CVauxhall",
+    "scheme": "mymvxsdk",
+    "clients": [
+      {
+        "client_id": "122f3511-4f74-4a0c-bcda-af2f3b2e3a65",
+        "client_secret": "N1iY3jO4jI1sF2yS6yJ3rG7xQ4kL4kK1dO3xT5uX6dF3kW8gI6"
+      }
+    ],
+    "countries": {
+      "GB": {
+        "locale": "en-GB",
+        "client": 0
+      }
+    }
+  }
+}
