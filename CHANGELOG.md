@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-14
+
 ### Added
 
 - Peugeot, Citroën, DS, Opel and Vauxhall cars of a MyPeugeot, MyCitroën, MyDS, MyOpel or
@@ -25,3 +27,6 @@ the notes of the version's GitHub Release.
 - Dashboard widget "My car (Stellantis)".
 - Documentation in English, French, German and Spanish, with a browser-by-browser guide to the
   sign-in code.
+
+[Unreleased]: https://github.com/guim31/gladys-stellantis/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/guim31/gladys-stellantis/releases/tag/v1.0.1
