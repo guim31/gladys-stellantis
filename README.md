@@ -34,6 +34,9 @@ User documentation: [English](docs/en.md) · [Français](docs/fr.md) · [Deutsch
 
 - Gladys Assistant 5.1 or later.
 - A car with connected services, visible in the brand's app, and that app's e-mail and password.
+- No paid subscription: reading the car's state only needs the free app and the basic connected
+  services. The paid offers (e-Remote Control, Remote Control, Connect Plus) are only needed for
+  remote commands, which this version does not send.
 - A computer with a desktop browser for the sign-in (once).
 
 ## Installation

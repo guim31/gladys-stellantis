@@ -25,6 +25,10 @@ bienvenus, sur le forum ou dans les issues GitHub.
   déjà ajoutée dans l'application de la marque (MyPeugeot, MyCitroën, MyDS, MyOpel, MyVauxhall) et
   dont l'état s'y affiche.
 - L'adresse e-mail et le mot de passe du compte de cette application.
+- **Aucun abonnement payant** : l'intégration ne fait que lire l'état de la voiture, ce que
+  l'application gratuite et les services connectés de base permettent (sur une électrique neuve,
+  le pack Connect One est inclus plusieurs années). Les offres payantes (e-Remote Control,
+  Remote Control, Connect Plus) ne servent qu'aux commandes à distance, que cette version ne fait pas.
 - Un **ordinateur** avec Chrome, Edge, Firefox ou Safari pour la connexion (une fois, puis
   seulement si la session prend fin) : le code se lit dans les outils de développement du
   navigateur.

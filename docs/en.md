@@ -25,6 +25,10 @@ the GitHub issues.
   already added to the brand's app (MyPeugeot, MyCitroën, MyDS, MyOpel, MyVauxhall) and showing its
   state there.
 - The e-mail address and password of that app's account.
+- **No paid subscription**: the integration only reads the car's state, which the free app and
+  the basic connected services allow (a new electric car includes the Connect One pack for several
+  years). The paid offers (e-Remote Control, Remote Control, Connect Plus) are only needed for remote
+  commands, which this version does not send.
 - A **computer** with Chrome, Edge, Firefox or Safari for the sign-in (once, then again only if the
   session ends): the code is read in the browser's developer tools.
 - Gladys 5.1 or later, with access to the Internet.
