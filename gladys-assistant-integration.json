@@ -1,177 +1,1150 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "Peugeot / Citroën / DS / Opel",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "Peugeot, Citroën, DS, Opel and Vauxhall cars: battery, range, charging, fuel, locks.",
+    "fr": "Voitures Peugeot, Citroën, DS, Opel et Vauxhall : batterie, autonomie, charge, carburant.",
+    "de": "Autos von Peugeot, Citroën, DS, Opel und Vauxhall: Batterie, Reichweite, Laden, Tank.",
+    "es": "Coches Peugeot, Citroën, DS, Opel y Vauxhall: batería, autonomía, carga, combustible."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
+  "docker_image": "ghcr.io/guim31/gladys-stellantis:1.0.0",
   "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-stellantis/main/cover.png",
+  "categories": ["energy"],
+  "transports": ["cloud"],
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Before you start",
+        "fr": "Avant de commencer",
+        "de": "Bevor du loslegst",
+        "es": "Antes de empezar"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "This integration signs in to your MyPeugeot, MyCitroën, MyDS, MyOpel or MyVauxhall account, like the app, and reads the state your cars last sent to the Stellantis cloud: it never wakes them. Remote commands (preconditioning, charge, locks) are not supported yet. Developed without a car: feedback welcome. Not affiliated with Stellantis or its brands.",
+        "fr": "Cette intégration se connecte à votre compte MyPeugeot, MyCitroën, MyDS, MyOpel ou MyVauxhall, comme l'application, et lit l'état que vos voitures ont envoyé au cloud Stellantis : elle ne les réveille jamais. Les commandes à distance (préconditionnement, charge, verrouillage) ne sont pas encore prises en charge. Développée sans voiture : retours bienvenus. Sans lien avec Stellantis ni ses marques.",
+        "de": "Diese Integration meldet sich wie die App bei deinem MyPeugeot-, MyCitroën-, MyDS-, MyOpel- oder MyVauxhall-Konto an und liest den Zustand, den deine Autos zuletzt an die Stellantis-Cloud gesendet haben, ohne sie je zu wecken. Fernbefehle (Vorklimatisierung, Laden, Verriegelung) werden noch nicht unterstützt. Ohne Auto entwickelt: Rückmeldungen willkommen. Nicht mit Stellantis oder seinen Marken verbunden.",
+        "es": "Esta integración inicia sesión en su cuenta MyPeugeot, MyCitroën, MyDS, MyOpel o MyVauxhall, como la aplicación, y lee el estado que sus coches enviaron a la nube de Stellantis: nunca los despierta. Los comandos a distancia (preacondicionamiento, carga, cierre) aún no están disponibles. Desarrollada sin coche: se agradecen sus comentarios. Sin relación con Stellantis ni sus marcas."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://github.com/guim31/gladys-stellantis/blob/main/docs/en.md",
+          "label": {
+            "en": "Step-by-step guide",
+            "fr": "Guide pas à pas",
+            "de": "Schritt-für-Schritt-Anleitung",
+            "es": "Guía paso a paso"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
-      },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
-    },
-    {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
-      "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
-      },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
+      "key": "brand",
       "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
-      "required": false,
-      "default": "celsius",
+      "label": {
+        "en": "App of the car",
+        "fr": "Application de la voiture",
+        "de": "App des Autos",
+        "es": "Aplicación del coche"
+      },
+      "description": {
+        "en": "The app you use for your car: the account and the sign-in page depend on it.",
+        "fr": "L'application que vous utilisez pour votre voiture : le compte et la page de connexion en dépendent.",
+        "de": "Die App, die du für dein Auto nutzt: Konto und Anmeldeseite hängen davon ab.",
+        "es": "La aplicación que usa para su coche: la cuenta y la página de inicio de sesión dependen de ella."
+      },
+      "required": true,
+      "default": "peugeot",
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "peugeot",
+          "label": {
+            "en": "MyPeugeot",
+            "fr": "MyPeugeot",
+            "de": "MyPeugeot",
+            "es": "MyPeugeot"
+          }
+        },
+        {
+          "value": "citroen",
+          "label": {
+            "en": "MyCitroën",
+            "fr": "MyCitroën",
+            "de": "MyCitroën",
+            "es": "MyCitroën"
+          }
+        },
+        {
+          "value": "ds",
+          "label": {
+            "en": "MyDS",
+            "fr": "MyDS",
+            "de": "MyDS",
+            "es": "MyDS"
+          }
+        },
+        {
+          "value": "opel",
+          "label": {
+            "en": "MyOpel",
+            "fr": "MyOpel",
+            "de": "MyOpel",
+            "es": "MyOpel"
+          }
+        },
+        {
+          "value": "vauxhall",
+          "label": {
+            "en": "MyVauxhall",
+            "fr": "MyVauxhall",
+            "de": "MyVauxhall",
+            "es": "MyVauxhall"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "key": "country",
+      "type": "select",
+      "label": {
+        "en": "Country of the account",
+        "fr": "Pays du compte",
+        "de": "Land des Kontos",
+        "es": "País de la cuenta"
+      },
       "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+        "en": "The country chosen in the app: it decides the app's identifiers. Vauxhall: United Kingdom only.",
+        "fr": "Le pays choisi dans l'application : il détermine les identifiants de l'application. Vauxhall : Royaume-Uni seulement.",
+        "de": "Das in der App gewählte Land: Davon hängen die Kennungen der App ab. Vauxhall: nur Vereinigtes Königreich.",
+        "es": "El país elegido en la aplicación: determina los identificadores de la aplicación. Vauxhall: solo Reino Unido."
+      },
+      "required": true,
+      "default": "FR",
+      "options": [
+        {
+          "value": "DZ",
+          "label": {
+            "en": "Algeria (DZ)",
+            "fr": "Algérie (DZ)",
+            "de": "Algerien (DZ)",
+            "es": "Argelia (DZ)"
+          }
+        },
+        {
+          "value": "AR",
+          "label": {
+            "en": "Argentina (AR)",
+            "fr": "Argentine (AR)",
+            "de": "Argentinien (AR)",
+            "es": "Argentina (AR)"
+          }
+        },
+        {
+          "value": "AU",
+          "label": {
+            "en": "Australia (AU)",
+            "fr": "Australie (AU)",
+            "de": "Australien (AU)",
+            "es": "Australia (AU)"
+          }
+        },
+        {
+          "value": "AT",
+          "label": {
+            "en": "Austria (AT)",
+            "fr": "Autriche (AT)",
+            "de": "Österreich (AT)",
+            "es": "Austria (AT)"
+          }
+        },
+        {
+          "value": "BE",
+          "label": {
+            "en": "Belgium (BE)",
+            "fr": "Belgique (BE)",
+            "de": "Belgien (BE)",
+            "es": "Bélgica (BE)"
+          }
+        },
+        {
+          "value": "BR",
+          "label": {
+            "en": "Brazil (BR)",
+            "fr": "Brésil (BR)",
+            "de": "Brasilien (BR)",
+            "es": "Brasil (BR)"
+          }
+        },
+        {
+          "value": "BN",
+          "label": {
+            "en": "Brunei (BN)",
+            "fr": "Brunei (BN)",
+            "de": "Brunei Darussalam (BN)",
+            "es": "Brunéi (BN)"
+          }
+        },
+        {
+          "value": "BG",
+          "label": {
+            "en": "Bulgaria (BG)",
+            "fr": "Bulgarie (BG)",
+            "de": "Bulgarien (BG)",
+            "es": "Bulgaria (BG)"
+          }
+        },
+        {
+          "value": "CL",
+          "label": {
+            "en": "Chile (CL)",
+            "fr": "Chili (CL)",
+            "de": "Chile (CL)",
+            "es": "Chile (CL)"
+          }
+        },
+        {
+          "value": "CO",
+          "label": {
+            "en": "Colombia (CO)",
+            "fr": "Colombie (CO)",
+            "de": "Kolumbien (CO)",
+            "es": "Colombia (CO)"
+          }
+        },
+        {
+          "value": "CR",
+          "label": {
+            "en": "Costa Rica (CR)",
+            "fr": "Costa Rica (CR)",
+            "de": "Costa Rica (CR)",
+            "es": "Costa Rica (CR)"
+          }
+        },
+        {
+          "value": "HR",
+          "label": {
+            "en": "Croatia (HR)",
+            "fr": "Croatie (HR)",
+            "de": "Kroatien (HR)",
+            "es": "Croacia (HR)"
+          }
+        },
+        {
+          "value": "CY",
+          "label": {
+            "en": "Cyprus (CY)",
+            "fr": "Chypre (CY)",
+            "de": "Zypern (CY)",
+            "es": "Chipre (CY)"
+          }
+        },
+        {
+          "value": "CZ",
+          "label": {
+            "en": "Czechia (CZ)",
+            "fr": "Tchéquie (CZ)",
+            "de": "Tschechien (CZ)",
+            "es": "Chequia (CZ)"
+          }
+        },
+        {
+          "value": "DK",
+          "label": {
+            "en": "Denmark (DK)",
+            "fr": "Danemark (DK)",
+            "de": "Dänemark (DK)",
+            "es": "Dinamarca (DK)"
+          }
+        },
+        {
+          "value": "EC",
+          "label": {
+            "en": "Ecuador (EC)",
+            "fr": "Équateur (EC)",
+            "de": "Ecuador (EC)",
+            "es": "Ecuador (EC)"
+          }
+        },
+        {
+          "value": "EE",
+          "label": {
+            "en": "Estonia (EE)",
+            "fr": "Estonie (EE)",
+            "de": "Estland (EE)",
+            "es": "Estonia (EE)"
+          }
+        },
+        {
+          "value": "FI",
+          "label": {
+            "en": "Finland (FI)",
+            "fr": "Finlande (FI)",
+            "de": "Finnland (FI)",
+            "es": "Finlandia (FI)"
+          }
+        },
+        {
+          "value": "FR",
+          "label": {
+            "en": "France (FR)",
+            "fr": "France (FR)",
+            "de": "Frankreich (FR)",
+            "es": "Francia (FR)"
+          }
+        },
+        {
+          "value": "GF",
+          "label": {
+            "en": "French Guiana (GF)",
+            "fr": "Guyane française (GF)",
+            "de": "Französisch-Guayana (GF)",
+            "es": "Guayana Francesa (GF)"
+          }
+        },
+        {
+          "value": "DE",
+          "label": {
+            "en": "Germany (DE)",
+            "fr": "Allemagne (DE)",
+            "de": "Deutschland (DE)",
+            "es": "Alemania (DE)"
+          }
+        },
+        {
+          "value": "GR",
+          "label": {
+            "en": "Greece (GR)",
+            "fr": "Grèce (GR)",
+            "de": "Griechenland (GR)",
+            "es": "Grecia (GR)"
+          }
+        },
+        {
+          "value": "GP",
+          "label": {
+            "en": "Guadeloupe (GP)",
+            "fr": "Guadeloupe (GP)",
+            "de": "Guadeloupe (GP)",
+            "es": "Guadalupe (GP)"
+          }
+        },
+        {
+          "value": "HU",
+          "label": {
+            "en": "Hungary (HU)",
+            "fr": "Hongrie (HU)",
+            "de": "Ungarn (HU)",
+            "es": "Hungría (HU)"
+          }
+        },
+        {
+          "value": "IS",
+          "label": {
+            "en": "Iceland (IS)",
+            "fr": "Islande (IS)",
+            "de": "Island (IS)",
+            "es": "Islandia (IS)"
+          }
+        },
+        {
+          "value": "IN",
+          "label": {
+            "en": "India (IN)",
+            "fr": "Inde (IN)",
+            "de": "Indien (IN)",
+            "es": "India (IN)"
+          }
+        },
+        {
+          "value": "IR",
+          "label": {
+            "en": "Iran (IR)",
+            "fr": "Iran (IR)",
+            "de": "Iran (IR)",
+            "es": "Irán (IR)"
+          }
+        },
+        {
+          "value": "IE",
+          "label": {
+            "en": "Ireland (IE)",
+            "fr": "Irlande (IE)",
+            "de": "Irland (IE)",
+            "es": "Irlanda (IE)"
+          }
+        },
+        {
+          "value": "IT",
+          "label": {
+            "en": "Italy (IT)",
+            "fr": "Italie (IT)",
+            "de": "Italien (IT)",
+            "es": "Italia (IT)"
+          }
+        },
+        {
+          "value": "JP",
+          "label": {
+            "en": "Japan (JP)",
+            "fr": "Japon (JP)",
+            "de": "Japan (JP)",
+            "es": "Japón (JP)"
+          }
+        },
+        {
+          "value": "LV",
+          "label": {
+            "en": "Latvia (LV)",
+            "fr": "Lettonie (LV)",
+            "de": "Lettland (LV)",
+            "es": "Letonia (LV)"
+          }
+        },
+        {
+          "value": "LB",
+          "label": {
+            "en": "Lebanon (LB)",
+            "fr": "Liban (LB)",
+            "de": "Libanon (LB)",
+            "es": "Líbano (LB)"
+          }
+        },
+        {
+          "value": "LT",
+          "label": {
+            "en": "Lithuania (LT)",
+            "fr": "Lituanie (LT)",
+            "de": "Litauen (LT)",
+            "es": "Lituania (LT)"
+          }
+        },
+        {
+          "value": "LU",
+          "label": {
+            "en": "Luxembourg (LU)",
+            "fr": "Luxembourg (LU)",
+            "de": "Luxemburg (LU)",
+            "es": "Luxemburgo (LU)"
+          }
+        },
+        {
+          "value": "MY",
+          "label": {
+            "en": "Malaysia (MY)",
+            "fr": "Malaisie (MY)",
+            "de": "Malaysia (MY)",
+            "es": "Malasia (MY)"
+          }
+        },
+        {
+          "value": "MT",
+          "label": {
+            "en": "Malta (MT)",
+            "fr": "Malte (MT)",
+            "de": "Malta (MT)",
+            "es": "Malta (MT)"
+          }
+        },
+        {
+          "value": "MQ",
+          "label": {
+            "en": "Martinique (MQ)",
+            "fr": "Martinique (MQ)",
+            "de": "Martinique (MQ)",
+            "es": "Martinica (MQ)"
+          }
+        },
+        {
+          "value": "MX",
+          "label": {
+            "en": "Mexico (MX)",
+            "fr": "Mexique (MX)",
+            "de": "Mexiko (MX)",
+            "es": "México (MX)"
+          }
+        },
+        {
+          "value": "MA",
+          "label": {
+            "en": "Morocco (MA)",
+            "fr": "Maroc (MA)",
+            "de": "Marokko (MA)",
+            "es": "Marruecos (MA)"
+          }
+        },
+        {
+          "value": "NL",
+          "label": {
+            "en": "Netherlands (NL)",
+            "fr": "Pays-Bas (NL)",
+            "de": "Niederlande (NL)",
+            "es": "Países Bajos (NL)"
+          }
+        },
+        {
+          "value": "NC",
+          "label": {
+            "en": "New Caledonia (NC)",
+            "fr": "Nouvelle-Calédonie (NC)",
+            "de": "Neukaledonien (NC)",
+            "es": "Nueva Caledonia (NC)"
+          }
+        },
+        {
+          "value": "NZ",
+          "label": {
+            "en": "New Zealand (NZ)",
+            "fr": "Nouvelle-Zélande (NZ)",
+            "de": "Neuseeland (NZ)",
+            "es": "Nueva Zelanda (NZ)"
+          }
+        },
+        {
+          "value": "NO",
+          "label": {
+            "en": "Norway (NO)",
+            "fr": "Norvège (NO)",
+            "de": "Norwegen (NO)",
+            "es": "Noruega (NO)"
+          }
+        },
+        {
+          "value": "PY",
+          "label": {
+            "en": "Paraguay (PY)",
+            "fr": "Paraguay (PY)",
+            "de": "Paraguay (PY)",
+            "es": "Paraguay (PY)"
+          }
+        },
+        {
+          "value": "PE",
+          "label": {
+            "en": "Peru (PE)",
+            "fr": "Pérou (PE)",
+            "de": "Peru (PE)",
+            "es": "Perú (PE)"
+          }
+        },
+        {
+          "value": "PH",
+          "label": {
+            "en": "Philippines (PH)",
+            "fr": "Philippines (PH)",
+            "de": "Philippinen (PH)",
+            "es": "Filipinas (PH)"
+          }
+        },
+        {
+          "value": "PL",
+          "label": {
+            "en": "Poland (PL)",
+            "fr": "Pologne (PL)",
+            "de": "Polen (PL)",
+            "es": "Polonia (PL)"
+          }
+        },
+        {
+          "value": "PT",
+          "label": {
+            "en": "Portugal (PT)",
+            "fr": "Portugal (PT)",
+            "de": "Portugal (PT)",
+            "es": "Portugal (PT)"
+          }
+        },
+        {
+          "value": "RE",
+          "label": {
+            "en": "Réunion (RE)",
+            "fr": "La Réunion (RE)",
+            "de": "Réunion (RE)",
+            "es": "Reunión (RE)"
+          }
+        },
+        {
+          "value": "RO",
+          "label": {
+            "en": "Romania (RO)",
+            "fr": "Roumanie (RO)",
+            "de": "Rumänien (RO)",
+            "es": "Rumanía (RO)"
+          }
+        },
+        {
+          "value": "RU",
+          "label": {
+            "en": "Russia (RU)",
+            "fr": "Russie (RU)",
+            "de": "Russland (RU)",
+            "es": "Rusia (RU)"
+          }
+        },
+        {
+          "value": "RS",
+          "label": {
+            "en": "Serbia (RS)",
+            "fr": "Serbie (RS)",
+            "de": "Serbien (RS)",
+            "es": "Serbia (RS)"
+          }
+        },
+        {
+          "value": "SG",
+          "label": {
+            "en": "Singapore (SG)",
+            "fr": "Singapour (SG)",
+            "de": "Singapur (SG)",
+            "es": "Singapur (SG)"
+          }
+        },
+        {
+          "value": "SK",
+          "label": {
+            "en": "Slovakia (SK)",
+            "fr": "Slovaquie (SK)",
+            "de": "Slowakei (SK)",
+            "es": "Eslovaquia (SK)"
+          }
+        },
+        {
+          "value": "SI",
+          "label": {
+            "en": "Slovenia (SI)",
+            "fr": "Slovénie (SI)",
+            "de": "Slowenien (SI)",
+            "es": "Eslovenia (SI)"
+          }
+        },
+        {
+          "value": "ZA",
+          "label": {
+            "en": "South Africa (ZA)",
+            "fr": "Afrique du Sud (ZA)",
+            "de": "Südafrika (ZA)",
+            "es": "Sudáfrica (ZA)"
+          }
+        },
+        {
+          "value": "KR",
+          "label": {
+            "en": "South Korea (KR)",
+            "fr": "Corée du Sud (KR)",
+            "de": "Südkorea (KR)",
+            "es": "Corea del Sur (KR)"
+          }
+        },
+        {
+          "value": "ES",
+          "label": {
+            "en": "Spain (ES)",
+            "fr": "Espagne (ES)",
+            "de": "Spanien (ES)",
+            "es": "España (ES)"
+          }
+        },
+        {
+          "value": "SE",
+          "label": {
+            "en": "Sweden (SE)",
+            "fr": "Suède (SE)",
+            "de": "Schweden (SE)",
+            "es": "Suecia (SE)"
+          }
+        },
+        {
+          "value": "CH",
+          "label": {
+            "en": "Switzerland (CH)",
+            "fr": "Suisse (CH)",
+            "de": "Schweiz (CH)",
+            "es": "Suiza (CH)"
+          }
+        },
+        {
+          "value": "TW",
+          "label": {
+            "en": "Taiwan (TW)",
+            "fr": "Taïwan (TW)",
+            "de": "Taiwan (TW)",
+            "es": "Taiwán (TW)"
+          }
+        },
+        {
+          "value": "TH",
+          "label": {
+            "en": "Thailand (TH)",
+            "fr": "Thaïlande (TH)",
+            "de": "Thailand (TH)",
+            "es": "Tailandia (TH)"
+          }
+        },
+        {
+          "value": "TN",
+          "label": {
+            "en": "Tunisia (TN)",
+            "fr": "Tunisie (TN)",
+            "de": "Tunesien (TN)",
+            "es": "Túnez (TN)"
+          }
+        },
+        {
+          "value": "TR",
+          "label": {
+            "en": "Türkiye (TR)",
+            "fr": "Turquie (TR)",
+            "de": "Türkei (TR)",
+            "es": "Turquía (TR)"
+          }
+        },
+        {
+          "value": "UA",
+          "label": {
+            "en": "Ukraine (UA)",
+            "fr": "Ukraine (UA)",
+            "de": "Ukraine (UA)",
+            "es": "Ucrania (UA)"
+          }
+        },
+        {
+          "value": "GB",
+          "label": {
+            "en": "United Kingdom (GB)",
+            "fr": "Royaume-Uni (GB)",
+            "de": "Vereinigtes Königreich (GB)",
+            "es": "Reino Unido (GB)"
+          }
+        },
+        {
+          "value": "UY",
+          "label": {
+            "en": "Uruguay (UY)",
+            "fr": "Uruguay (UY)",
+            "de": "Uruguay (UY)",
+            "es": "Uruguay (UY)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "sign_in",
+      "type": "section",
+      "label": {
+        "en": "Sign in",
+        "fr": "Connexion",
+        "de": "Anmeldung",
+        "es": "Inicio de sesión"
+      },
+      "description": {
+        "en": "On a computer:\n1. Choose the app and the country above, then save.\n2. Click Connect: the brand's sign-in page opens in a new tab. In that tab, open the developer tools (F12, or Cmd+Option+I on a Mac) on the Console tab.\n3. Sign in with the e-mail address and password of the app. The page then seems to do nothing: that is expected.\n4. In the console, a red line mentions an address starting with mymap:// (mymacsdk://, mymdssdk://, mymopsdk:// or mymvxsdk:// for the other brands) and containing code=. Copy that address.\n5. Within two minutes, paste it in the “Finish the sign-in” action at the bottom of this page.\nGladys never sees your password. The guide shows where to find the address in each browser.",
+        "fr": "Sur un ordinateur :\n1. Choisissez l'application et le pays ci-dessus, puis enregistrez.\n2. Cliquez sur Connecter : la page de connexion de la marque s'ouvre dans un nouvel onglet. Dans cet onglet, ouvrez les outils de développement (F12, ou Cmd+Option+I sur Mac), onglet Console.\n3. Connectez-vous avec l'adresse e-mail et le mot de passe de l'application. La page semble ensuite ne rien faire : c'est normal.\n4. Dans la console, une ligne rouge cite une adresse qui commence par mymap:// (mymacsdk://, mymdssdk://, mymopsdk:// ou mymvxsdk:// pour les autres marques) et contient code=. Copiez cette adresse.\n5. Dans les deux minutes, collez-la dans l'action « Terminer la connexion » en bas de cette page.\nGladys ne voit jamais votre mot de passe. Le guide montre où trouver l'adresse dans chaque navigateur.",
+        "de": "Am Computer:\n1. Wähle oben App und Land und speichere.\n2. Klicke auf Verbinden: Die Anmeldeseite der Marke öffnet sich in einem neuen Tab. Öffne in diesem Tab die Entwicklertools (F12, oder Cmd+Option+I auf dem Mac), Reiter Konsole.\n3. Melde dich mit der E-Mail-Adresse und dem Passwort der App an. Die Seite scheint danach nichts zu tun: Das ist normal.\n4. In der Konsole nennt eine rote Zeile eine Adresse, die mit mymap:// beginnt (mymacsdk://, mymdssdk://, mymopsdk:// oder mymvxsdk:// bei den anderen Marken) und code= enthält. Kopiere diese Adresse.\n5. Füge sie innerhalb von zwei Minuten in die Aktion „Anmeldung abschließen“ unten auf dieser Seite ein.\nGladys sieht dein Passwort nie. Die Anleitung zeigt, wo du die Adresse in jedem Browser findest.",
+        "es": "En un ordenador:\n1. Elija la aplicación y el país arriba y guarde.\n2. Pulse Conectar: la página de inicio de sesión de la marca se abre en una pestaña nueva. En esa pestaña, abra las herramientas de desarrollo (F12, o Cmd+Option+I en Mac), pestaña Consola.\n3. Inicie sesión con el correo y la contraseña de la aplicación. Después la página parece no hacer nada: es normal.\n4. En la consola, una línea roja cita una dirección que empieza por mymap:// (mymacsdk://, mymdssdk://, mymopsdk:// o mymvxsdk:// para las otras marcas) y contiene code=. Copie esa dirección.\n5. En los dos minutos siguientes, péguela en la acción «Terminar el inicio de sesión» al final de esta página.\nGladys nunca ve su contraseña. La guía muestra dónde encontrar la dirección en cada navegador."
+      },
+      "links": [
+        {
+          "url": "https://github.com/guim31/gladys-stellantis/blob/main/docs/en.md#sign-in",
+          "label": {
+            "en": "Where to find the code, browser by browser",
+            "fr": "Où trouver le code, navigateur par navigateur",
+            "de": "Wo du den Code findest, je Browser",
+            "es": "Dónde encontrar el código en cada navegador"
+          }
+        }
+      ]
+    },
+    {
+      "key": "stellantis_account",
+      "type": "account_link",
+      "label": {
+        "en": "Account of the app",
+        "fr": "Compte de l'application",
+        "de": "Konto der App",
+        "es": "Cuenta de la aplicación"
+      }
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Device names language",
+        "fr": "Langue des noms d'appareils",
+        "de": "Sprache der Gerätenamen",
+        "es": "Idioma de los nombres"
+      },
+      "description": {
+        "en": "Language of the feature names given to new devices (Gladys keeps a name once the device is created).",
+        "fr": "Langue des noms de fonctionnalités des nouveaux appareils (Gladys garde un nom une fois l'appareil créé).",
+        "de": "Sprache der Funktionsnamen neuer Geräte (Gladys behält einen Namen, sobald das Gerät erstellt ist).",
+        "es": "Idioma de los nombres de las funciones de los nuevos dispositivos (Gladys conserva un nombre una vez creado el dispositivo)."
       },
       "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "default": "fr",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
+    },
+    {
+      "key": "refresh_minutes",
+      "type": "select",
+      "label": {
+        "en": "Refresh",
+        "fr": "Relevé",
+        "de": "Abfrage",
+        "es": "Actualización"
+      },
+      "description": {
+        "en": "How often the cloud is read. It never wakes the car: it gets the state the car last sent.",
+        "fr": "Fréquence de lecture du cloud. Elle ne réveille jamais la voiture : elle obtient le dernier état envoyé par la voiture.",
+        "de": "Wie oft die Cloud gelesen wird. Das weckt das Auto nie: Es kommt der zuletzt vom Auto gesendete Zustand.",
+        "es": "Frecuencia de lectura de la nube. Nunca despierta el coche: obtiene el último estado que envió el coche."
+      },
+      "required": false,
+      "default": "15",
+      "options": [
+        {
+          "value": "10",
+          "label": {
+            "en": "Every 10 minutes",
+            "fr": "Toutes les 10 minutes",
+            "de": "Alle 10 Minuten",
+            "es": "Cada 10 minutos"
+          }
+        },
+        {
+          "value": "15",
+          "label": {
+            "en": "Every 15 minutes",
+            "fr": "Toutes les 15 minutes",
+            "de": "Alle 15 Minuten",
+            "es": "Cada 15 minutos"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "Every 30 minutes",
+            "fr": "Toutes les 30 minutes",
+            "de": "Alle 30 Minuten",
+            "es": "Cada 30 minutos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "Every hour",
+            "fr": "Toutes les heures",
+            "de": "Stündlich",
+            "es": "Cada hora"
+          }
+        }
+      ]
+    },
+    {
+      "key": "gps",
+      "type": "boolean",
+      "label": {
+        "en": "GPS position",
+        "fr": "Position GPS",
+        "de": "GPS-Position",
+        "es": "Posición GPS"
+      },
+      "description": {
+        "en": "Off by default (privacy). On: the last position the car sent is shown in Gladys.",
+        "fr": "Désactivée par défaut (vie privée). Activée : la dernière position envoyée par la voiture est affichée dans Gladys.",
+        "de": "Standardmäßig aus (Privatsphäre). An: Die zuletzt vom Auto gesendete Position wird in Gladys angezeigt.",
+        "es": "Desactivada por defecto (privacidad). Activada: se muestra en Gladys la última posición enviada por el coche."
+      },
+      "required": false,
+      "default": false
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
-    {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
+      "key": "finish_sign_in",
+      "label": {
+        "en": "Finish the sign-in",
+        "fr": "Terminer la connexion",
+        "de": "Anmeldung abschließen",
+        "es": "Terminar el inicio de sesión"
+      },
+      "description": {
+        "en": "Paste the mymap://… address (or the code alone) copied after signing in.",
+        "fr": "Collez l'adresse mymap://… (ou le code seul) copiée après la connexion.",
+        "de": "Füge die nach der Anmeldung kopierte Adresse mymap://… (oder nur den Code) ein.",
+        "es": "Pegue la dirección mymap://… (o solo el código) copiada tras iniciar sesión."
+      },
+      "timeout_seconds": 60,
       "fields": [
         {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "Address or code",
+            "fr": "Adresse ou code",
+            "de": "Adresse oder Code",
+            "es": "Dirección o código"
+          },
+          "placeholder": {
+            "en": "mymap://oauth2redirect/fr?code=…",
+            "fr": "mymap://oauth2redirect/fr?code=…",
+            "de": "mymap://oauth2redirect/fr?code=…",
+            "es": "mymap://oauth2redirect/fr?code=…"
+          },
           "required": true
         }
       ]
+    },
+    {
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "description": {
+        "en": "Lists the vehicles of the account. No car is woken.",
+        "fr": "Liste les véhicules du compte. Aucune voiture n'est réveillée.",
+        "de": "Listet die Fahrzeuge des Kontos auf. Kein Auto wird geweckt.",
+        "es": "Muestra los vehículos de la cuenta. No se despierta ningún coche."
+      },
+      "timeout_seconds": 60
+    },
+    {
+      "key": "sign_out",
+      "label": {
+        "en": "Sign out",
+        "fr": "Se déconnecter",
+        "de": "Abmelden",
+        "es": "Cerrar sesión"
+      },
+      "description": {
+        "en": "Deletes the tokens stored by Gladys. The devices stay, without new readings.",
+        "fr": "Supprime les jetons enregistrés par Gladys. Les appareils restent, sans nouveau relevé.",
+        "de": "Löscht die von Gladys gespeicherten Token. Die Geräte bleiben, ohne neue Werte.",
+        "es": "Borra los tokens guardados por Gladys. Los dispositivos se mantienen, sin nuevas lecturas."
+      },
+      "timeout_seconds": 30
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "charge_finished",
+      "label": {
+        "en": "Charge finished",
+        "fr": "Charge terminée",
+        "de": "Laden beendet",
+        "es": "Carga terminada"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "The car reports a complete charge after a charge in progress (not a charge stopped or failed).",
+        "fr": "La voiture signale une charge complète après une charge en cours (pas une charge arrêtée ou en échec).",
+        "de": "Das Auto meldet ein abgeschlossenes Laden nach einem laufenden Ladevorgang (kein gestopptes oder fehlgeschlagenes).",
+        "es": "El coche indica una carga completa tras una carga en curso (no una carga detenida o fallida)."
       },
       "fields": [
         {
           "key": "device",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
-        },
-        {
-          "key": "target",
-          "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
-          "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
-          ]
+          "label": {
+            "en": "Vehicle",
+            "fr": "Véhicule",
+            "de": "Fahrzeug",
+            "es": "Vehículo"
+          },
+          "required": false
         }
       ],
       "variables": [
         {
-          "key": "target",
-          "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "range_km",
+          "type": "number",
+          "label": {
+            "en": "Electric range (km)",
+            "fr": "Autonomie électrique (km)",
+            "de": "Elektrische Reichweite (km)",
+            "es": "Autonomía eléctrica (km)"
+          }
         }
       ]
     }
   ],
   "scene_actions": [
     {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
+      "key": "refresh_vehicle",
+      "label": {
+        "en": "Read a Stellantis car now",
+        "fr": "Relire une voiture Stellantis",
+        "de": "Stellantis-Auto jetzt lesen",
+        "es": "Leer ahora un coche Stellantis"
       },
-      "timeout_seconds": 15,
+      "description": {
+        "en": "Reads the state the car last sent to the cloud now (it does not wake the car), for the next actions of the scene.",
+        "fr": "Lit maintenant l'état que la voiture a envoyé au cloud (sans la réveiller), pour les actions suivantes de la scène.",
+        "de": "Liest jetzt den Zustand, den das Auto an die Cloud gesendet hat (ohne es zu wecken), für die nächsten Aktionen der Szene.",
+        "es": "Lee ahora el estado que el coche envió a la nube (sin despertarlo), para las siguientes acciones de la escena."
+      },
+      "timeout_seconds": 60,
       "fields": [
         {
           "key": "device",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
+          "label": {
+            "en": "Vehicle",
+            "fr": "Véhicule",
+            "de": "Fahrzeug",
+            "es": "Vehículo"
+          },
           "required": true
         }
       ],
       "outputs": [
         {
-          "key": "signalled",
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "fuel_level",
+          "type": "number",
+          "label": {
+            "en": "Fuel level (%)",
+            "fr": "Niveau de carburant (%)",
+            "de": "Tankfüllstand (%)",
+            "es": "Nivel de combustible (%)"
+          }
+        },
+        {
+          "key": "range_km",
+          "type": "number",
+          "label": {
+            "en": "Total range (km)",
+            "fr": "Autonomie totale (km)",
+            "de": "Gesamtreichweite (km)",
+            "es": "Autonomía total (km)"
+          }
+        },
+        {
+          "key": "plugged",
           "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "label": {
+            "en": "Plugged in",
+            "fr": "Branchée",
+            "de": "Angeschlossen",
+            "es": "Enchufado"
+          }
+        },
+        {
+          "key": "charging",
+          "type": "boolean",
+          "label": {
+            "en": "Charging",
+            "fr": "En charge",
+            "de": "Lädt",
+            "es": "Cargando"
+          }
+        },
+        {
+          "key": "locked",
+          "type": "boolean",
+          "label": {
+            "en": "Locked",
+            "fr": "Verrouillée",
+            "de": "Verriegelt",
+            "es": "Bloqueado"
+          }
         }
       ]
     }
   ],
   "widgets": [
     {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
+      "key": "vehicle",
+      "label": {
+        "en": "My car (Stellantis)",
+        "fr": "Ma voiture (Stellantis)",
+        "de": "Mein Auto (Stellantis)",
+        "es": "Mi coche (Stellantis)"
       },
-      "icon": "activity",
-      "action_timeout_seconds": 15
+      "description": {
+        "en": "Battery or fuel, range, charging, doors and preconditioning of one car.",
+        "fr": "Batterie ou carburant, autonomie, charge, portes et préconditionnement d'une voiture.",
+        "de": "Batterie oder Tank, Reichweite, Laden, Türen und Vorklimatisierung eines Autos.",
+        "es": "Batería o combustible, autonomía, carga, puertas y preacondicionamiento de un coche."
+      },
+      "icon": "battery-charging",
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Vehicle",
+            "fr": "Véhicule",
+            "de": "Fahrzeug",
+            "es": "Vehículo"
+          },
+          "required": true
+        }
+      ],
+      "action_timeout_seconds": 60
     }
   ]
 }

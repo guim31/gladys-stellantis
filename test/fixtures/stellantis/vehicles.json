@@ -1,0 +1,38 @@
+{
+  "total": 3,
+  "_links": {
+    "self": { "href": "https://api.groupe-psa.com/connectedcar/v4/user/vehicles" }
+  },
+  "_embedded": {
+    "vehicles": [
+      {
+        "id": "a1b2c3d4e5f60718293a4b5c6d7e8f90",
+        "vin": "VR3TESTVIN0000208",
+        "brand": "Peugeot",
+        "label": "e-208",
+        "motorization": "Electric",
+        "pictures": ["https://visuel3d-secure.peugeot.com/example.png"],
+        "_links": {
+          "self": {
+            "href": "https://api.groupe-psa.com/connectedcar/v4/user/vehicles/a1b2c3d4e5f60718293a4b5c6d7e8f90"
+          }
+        }
+      },
+      {
+        "id": "b2c3d4e5f60718293a4b5c6d7e8f90a1",
+        "vin": "VR3TESTVIN0003008",
+        "brand": "PEUGEOT",
+        "label": "3008 HYBRID4",
+        "motorization": "Hybrid",
+        "pictures": []
+      },
+      {
+        "id": "c3d4e5f60718293a4b5c6d7e8f90a1b2",
+        "vin": "VF7TESTVIN00000C5",
+        "brand": "Citroën",
+        "label": "C5 Aircross",
+        "engine": [{ "class": "Thermic", "energy": "Gasoil" }]
+      }
+    ]
+  }
+}

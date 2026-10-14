@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" font-family="Menlo, Consolas, monospace" font-size="13">
+  <title>Schematic: the Network tab of the developer tools, last request of the sign-in and its location header</title>
+  <rect width="900" height="300" fill="#ffffff" stroke="#c8ccd0"/>
+  <rect width="900" height="34" fill="#f1f3f4"/>
+  <text x="16" y="22" fill="#5f6368">Elements</text>
+  <text x="108" y="22" fill="#5f6368">Console</text>
+  <rect x="190" y="0" width="84" height="34" fill="#ffffff"/>
+  <rect x="190" y="31" width="84" height="3" fill="#1a73e8"/>
+  <text x="202" y="22" fill="#1a73e8" font-weight="bold">Network</text>
+  <rect x="0" y="34" width="900" height="30" fill="#ffffff" stroke="#e0e0e0"/>
+  <rect x="14" y="43" width="12" height="12" fill="#1a73e8"/>
+  <text x="32" y="54" fill="#202124">Preserve log</text>
+  <text x="200" y="54" fill="#5f6368">Name</text>
+  <text x="350" y="54" fill="#5f6368">Status</text>
+  <text x="16" y="86" fill="#202124">…/am/XUI/?realm=…</text>
+  <text x="350" y="86" fill="#202124">200</text>
+  <rect x="0" y="96" width="430" height="26" fill="#e8f0fe"/>
+  <text x="16" y="114" fill="#202124" font-weight="bold">authorize?client_id=…</text>
+  <text x="350" y="114" fill="#202124">302</text>
+  <text x="16" y="142" fill="#d93025">oauth2redirect/fr?code=…</text>
+  <text x="350" y="142" fill="#d93025">(failed)</text>
+  <rect x="440" y="70" width="450" height="130" fill="#f8f9fa" stroke="#dadce0"/>
+  <text x="456" y="94" fill="#5f6368">Response Headers</text>
+  <text x="456" y="122" fill="#202124">location:</text>
+  <text x="456" y="144" fill="#202124">mymap://oauth2redirect/fr?code=<tspan font-weight="bold" style="text-decoration:underline">AbCdEf123-YOUR_CODE</tspan></text>
+  <text x="456" y="166" fill="#202124">&amp;scope=openid%20profile%20email</text>
+  <rect x="440" y="214" width="450" height="72" rx="6" fill="#e8f0fe" stroke="#1a73e8"/>
+  <text x="456" y="238" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">Click the last request (status 302, or the red one),</text>
+  <text x="456" y="258" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">copy the location address, or the URL of the</text>
+  <text x="456" y="278" fill="#174ea6" font-family="Helvetica, Arial, sans-serif" font-size="14">failed request, and paste it in Gladys.</text>
+</svg>

@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-10-13T06:40:11Z",
+  "doorsState": {
+    "lockedStates": ["Unlocked"],
+    "opening": [
+      { "identifier": "Driver", "state": "Closed" },
+      { "identifier": "Trunk", "state": "Open" }
+    ]
+  },
+  "energies": [
+    {
+      "type": "Fuel",
+      "subType": "FossilEnergy",
+      "level": 63,
+      "autonomy": 410,
+      "updatedAt": "2026-10-13T06:40:11Z",
+      "extension": { "fuel": { "consumptions": { "total": 51234, "instant": 0 } } }
+    },
+    {
+      "type": "Electric",
+      "subType": "ElectricBattery",
+      "level": 100,
+      "autonomy": 52,
+      "updatedAt": "2026-10-13T06:40:11Z",
+      "extension": {
+        "electric": {
+          "charging": {
+            "plugged": true,
+            "status": "Finished",
+            "remainingTime": "PT0S",
+            "chargingRate": 0,
+            "chargingMode": "No"
+          }
+        }
+      }
+    }
+  ],
+  "environment": { "air": { "temp": 9 } },
+  "odometer": { "mileage": 48211 },
+  "preconditioning": { "airConditioning": { "status": "Disabled" } },
+  "privacy": { "state": "None" }
+}
