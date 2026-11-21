@@ -107,7 +107,14 @@ export function createStellantisClient({ http, app, session, now = Date.now }) {
       const token = await accessToken();
       const response = await http.request(`${API_BASE_URL}${path}`, {
         query: { client_id: app.clientId, locale: app.locale, ...query },
-        headers: { Authorization: `Bearer ${token}`, 'x-introspect-realm': app.realm },
+        // The Connected Car API only serves HAL: `Accept: application/json` gets
+        // HTTP 406 (forum t/11159, 21/11/2026; same header as the Home
+        // Assistant integration and psa_car_controller).
+        headers: {
+          Accept: 'application/hal+json',
+          Authorization: `Bearer ${token}`,
+          'x-introspect-realm': app.realm,
+        },
       });
       try {
         return checkApiResponse(response.json(), response.status, what);

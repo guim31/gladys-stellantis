@@ -117,6 +117,10 @@ export function createFakeStellantis({ now = Date.now } = {}) {
     ) {
       return json(401, { httpMessage: 'Unauthorized', moreInformation: 'Invalid token' });
     }
+    // The real API only serves HAL (forum t/11159: 406 to application/json).
+    if (!String(headers.Accept ?? '').includes('application/hal+json')) {
+      return json(406, { httpMessage: 'Not Acceptable' });
+    }
     if (endpoint === 'vehicles') return json(200, cloud.vehicles);
     if (endpoint === 'status') {
       const id = decodeURIComponent(target.pathname.split('/').at(-2));
