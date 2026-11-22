@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-22
+
 ### Fixed
 
 - The car list failed with HTTP 406: the Connected Car API is now asked for `application/hal+json`, as the Stellantis app does.
@@ -32,5 +34,6 @@ the notes of the version's GitHub Release.
 - Documentation in English, French, German and Spanish, with a browser-by-browser guide to the
   sign-in code.
 
-[Unreleased]: https://github.com/guim31/gladys-stellantis/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/guim31/gladys-stellantis/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/guim31/gladys-stellantis/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/guim31/gladys-stellantis/releases/tag/v1.0.1
