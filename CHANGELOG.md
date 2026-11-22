@@ -10,6 +10,10 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Fixed
+
+- The car list failed with HTTP 406: the Connected Car API is now asked for `application/hal+json`, as the Stellantis app does.
+
 ## [1.0.1] - 2026-10-14
 
 ### Added
